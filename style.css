@@ -9,7 +9,6 @@
   font-family: Inter, Arial, Helvetica, sans-serif;
   max-width: 1280px;
   margin: 45px auto 60px;
-  /* outline: 1px solid red; */
   max-width: 880px;
   display: flex;
   flex-direction: column;
@@ -17,13 +16,13 @@
 
 @media screen and (max-width: 984px) {
   .page {
-    max-width: 540px;
+    max-width: 581px;
   }
 }
 
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 600px) {
   .page {
-    width: 320px;
+    /* max-width: 320px; */
     margin-top: 28px;
     margin-bottom: 36px;
   }
@@ -46,6 +45,74 @@
   }
 }
 
+.cards {
+  margin-top: 51px;
+}
+
+.cards__list {
+  list-style: none;
+  display: grid;
+  gap: 20px 17px;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  justify-content: center;
+  padding-left: 0;
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .cards__list {
+    grid-template-columns: 282px;
+  }
+}
+
+.cards__card {
+  display: flex;
+  flex-direction: column;
+  height: 361px;
+  background: #FFF;
+  border-radius: 10px;
+}
+
+.cards__description {
+  display: flex;
+  width: 246px;
+  margin: auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cards__image {
+  object-fit: cover;
+  width: 100%;
+  height: 282px;
+  border-radius: 10px 10px 0 0;
+}
+
+.cards__name {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cards__icon-heart {
+  cursor: pointer;
+  padding: 10px 11px 9px;
+  /* border-width: initial; */
+  border-style: none;
+  /* border-color: initial;
+  border-image: initial; */
+  background: url(./image/icon-heart.svg) center center / 100% no-repeat;
+  /* transition: all 0.3s ease 0s; */
+}
+
+.cards__icon-heart:hover {
+  opacity: 0.5;
+}
 
 .footer {
   color: #545454;
