@@ -1,7 +1,7 @@
 .popup__button-close {
   position: absolute;
   grid-column: -1/-2;
-  background: url(./image/icon-close.svg);
+  background: url(../../../image/icon-close.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 32px 32px;
