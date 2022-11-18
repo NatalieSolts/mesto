@@ -1,0 +1,13 @@
+.page {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  margin: auto;
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 984px) {
+  .page {
+    max-width: 581px;
+  }
+}
