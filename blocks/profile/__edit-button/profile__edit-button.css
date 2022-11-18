@@ -4,7 +4,8 @@
   background-position: center;
   background-size: 10px 10px;
   padding: 0px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   border: 1px solid #FFFFFF;
   width: 24px;
   height: 24px;

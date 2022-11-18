@@ -1,9 +1,11 @@
+
 .profile__name {
   font-weight: 500;
   font-size: 42px;
   line-height: 1.14;
   margin: 0;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -18,6 +20,8 @@
   .profile__name {
     font-size: 27px;
     line-height: 33px;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
     grid-column: 2/3;
     text-align: center;
   }
