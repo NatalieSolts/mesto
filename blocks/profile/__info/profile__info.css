@@ -1,7 +1,7 @@
 .profile__info {
   color: #FFF;
   display: grid;
-  grid-template-columns: 294px 24px;
+  grid-template-columns: minmax(189px, 294px) 24px;
   gap: 8px 16px;
   align-items: baseline;
 }

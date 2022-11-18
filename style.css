@@ -44,7 +44,8 @@
 
 .profile {
   display: grid;
-  grid-template-columns: 120px max-content 1fr;
+  grid-template-columns: 120px 1fr 1fr;
+  /* grid-template-columns: 120px 1fr max-content; */
   gap: 30px;
   align-items: center;
   justify-items: end;
@@ -69,7 +70,7 @@
 .profile__info {
   color: #FFF;
   display: grid;
-  grid-template-columns: 294px 24px;
+  grid-template-columns: minmax(189px, 294px) 24px;
   gap: 8px 16px;
   align-items: baseline;
 }
