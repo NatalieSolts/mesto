@@ -20,10 +20,10 @@
       <img src="./image/profile-avatar.jpg" alt="Аватар пользователя" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button" type="button"></button>
+        <button class="profile__edit-button button-hover" type="button"></button>
         <p class="profile__about">Исследователь океана</p>
       </div>
-      <button class="profile__add-button" type="button"></button>
+      <button class="profile__add-button button-hover" type="button"></button>
      </section>
      <section class="cards">
       <ul class="cards__list">
@@ -31,42 +31,42 @@
           <img class="cards__image" src="./image/cards-baikal.jpg" alt="Озеро Байкал">
           <div class="cards__description">
             <h2 class="cards__name">Озеро Байкал, Иркутск</h2>
-            <button class="cards__icon-heart"></button>
+            <button class="cards__icon-heart button-hover"></button>
           </div>
         </li>
         <li class="cards__card">
           <img class="cards__image" src="./image/cards-moscow.jpg" alt="Красная площадь">
           <div class="cards__description">
             <h2 class="cards__name">Москва</h2>
-            <button class="cards__icon-heart"></button>
+            <button class="cards__icon-heart button-hover"></button>
           </div>
         </li>
         <li class="cards__card">
           <img class="cards__image" src="./image/cards-kamchatka.jpg" alt="Вид на Тихий океан">
           <div class="cards__description">
             <h2 class="cards__name">Камчатка</h2>
-            <button class="cards__icon-heart"></button>
+            <button class="cards__icon-heart button-hover"></button>
           </div>
         </li>
         <li class="cards__card">
           <img class="cards__image" src="./image/cards-peterhof.jpg" alt="Петергофский дворец">
           <div class="cards__description">
             <h2 class="cards__name">Петергоф</h2>
-            <button class="cards__icon-heart"></button>
+            <button class="cards__icon-heart button-hover"></button>
           </div>
         </li>
         <li class="cards__card">
           <img class="cards__image" src="./image/cards-sochi.jpg" alt="Яхты в Сочи">
           <div class="cards__description">
             <h2 class="cards__name">Сочи</h2>
-            <button class="cards__icon-heart"></button>
+            <button class="cards__icon-heart button-hover"></button>
           </div>
         </li>
         <li class="cards__card">
           <img class="cards__image" src="./image/cards-elbrus.jpg" alt="Эльбрус">
           <div class="cards__description">
             <h2 class="cards__name">Гора Эльбрус, Кабардино-Балкария</h2>
-            <button class="cards__icon-heart"></button>
+            <button class="cards__icon-heart button-hover"></button>
           </div>
         </li>
       </ul>
@@ -75,6 +75,20 @@
     <footer class="footer">
       <p class="footer__text">&copy;&nbsp;2022 Mesto Russia</p>
     </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__button-close button-hover" type="reset"></button>
+        <div class="popup__content">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form action="" class="popup__form">
+            <input type="text" value="Жак-Ив Кусто" class="popup__text popup__text_name">
+            <input type="text" value="Исследователь океана" class="popup__text popup__text_job">
+            <button class="popup__button-submit button-hover" type="submit">Сохранить</button>
+          </form>
+        </div>
+      </div>
+    </section>
   </div>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
