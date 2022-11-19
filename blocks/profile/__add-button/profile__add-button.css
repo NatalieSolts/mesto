@@ -11,6 +11,7 @@
   border: 2px solid #FFFFFF;
   border-radius: 2px;
   cursor: pointer;
+  justify-self: end;
 }
 
 @media screen and (max-width: 984px) {
@@ -24,5 +25,6 @@
     background-size: 16px 16px;
     width: 282px;
     margin-top: 6px;
+    justify-self: center;
   }
 }

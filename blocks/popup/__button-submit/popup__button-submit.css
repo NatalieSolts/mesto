@@ -8,7 +8,9 @@
   font-size: 18px;
   line-height: 22px;
   cursor: pointer;
-  margin-top: 48px;
+  margin-top: 47px;
+  outline: none;
+  border: none;
 }
 
 @media screen and (max-width: 600px) {
