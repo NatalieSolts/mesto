@@ -27,7 +27,7 @@
      </section>
      <section class="cards" aria-label="Карточки с изображением мест">
       <ul class="cards__list">
-        <li class="cards__card">
+        <!-- <li class="cards__card">
           <img class="cards__image" src="./image/cards-baikal.jpg" alt="Озеро Байкал">
           <div class="cards__description">
             <h2 class="cards__name">Озеро Байкал, Иркутск</h2>
@@ -68,25 +68,61 @@
             <h2 class="cards__name">Гора Эльбрус, Кабардино-Балкария</h2>
             <button class="cards__icon-heart button-hover" type="button"></button>
           </div>
-        </li>
+        </li> -->
       </ul>
      </section>
    </main>
     <footer class="footer">
       <p class="footer__text">&copy;&nbsp;2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <!-- Попап редактировать профиль -->
+    <section class="popup popup_type_edit-profile">
       <div class="popup__container">
         <button class="popup__button-close button-hover" type="reset"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form action="#" name="popup__form" class="popup__form">
+          <form action="#" name="popup__form" class="popup__form popup__form_edit-profile">
             <input type="text" value="Жак-Ив Кусто" class="popup__text popup__text_type_name" name="popup__text_name" placeholder="Имя" required>
             <input type="text" value="Исследователь океана" class="popup__text popup__text_type_job" name="popup__text_job" placeholder="Описание деятельности" required>
             <button class="popup__button-submit button-hover" type="submit">Сохранить</button>
           </form>
       </div>
     </section>
+    <!-- Попап добавить новое место -->
+    <section class="popup popup_type_add-place">
+      <div class="popup__container">
+        <button class="popup__button-close button-hover" type="reset"></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form action="#" name="popup__form" class="popup__form popup__form_add-place">
+            <input type="text" value="" class="popup__text popup__text_type_card-name" name="popup__text_card-name" placeholder="Название" required>
+            <input type="url" value="" class="popup__text popup__text_type_link" name="popup__text_link" placeholder="Ссылка на картинку" required>
+            <button class="popup__button-submit button-hover" type="submit">Создать</button>
+          </form>
+      </div>
+    </section>
+    <!-- Попап увеличить изображение -->
+    <section class="popup popup_type_increase-card">
+      <div class="popup__container">
+        <button class="popup__button-close button-hover" type="reset"></button>
+        <figure class="">
+          <img class="cards__image" src="" alt="Изображение места">
+          <figcaption class="cards__name"></figcaption>
+        </figure>
+      </div>
+    </section>
   </div>
-  <script src="./scripts/index.js"></script>
+
+  <template id="cards-template">
+    <li class="cards__card">
+      <img class="cards__image" src=" " alt="Изображение места">
+      <button class="cards__delete button-hover" type="button"></button>
+      <div class="cards__description">
+        <h2 class="cards__name"></h2>
+        <button class="cards__icon-heart button-hover" type="button"></button>
+      </div>
+    </li>
+  </template>
+
+  <!-- <script src="./scripts/index.js"></script> -->
 </body>
+<script src="./scripts/index.js"></script>
 </html>
