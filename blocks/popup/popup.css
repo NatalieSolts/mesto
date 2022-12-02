@@ -4,7 +4,6 @@
   height: 100%;
   top: 0;
   left: 0;
-  display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -12,4 +11,10 @@
       -ms-flex-pack: center;
           justify-content: center;
   background-color: rgba(0, 0, 0, .5);
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s, opacity 0.4s linear;
+  -o-transition: visibility 0s, opacity 0.4s linear;
+  transition: visibility 0s, opacity 0.4s linear;
 }
