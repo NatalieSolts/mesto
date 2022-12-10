@@ -5,8 +5,8 @@ const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupOpenEditButton = document.querySelector('.profile__edit-button');
 const popupCloseEditButton = popupEditProfile.querySelector('.popup__button-close');
 const formEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
-const popupNameInput = popupEditProfile.querySelector('.popup__text_type_name');
-const popupJobInput = popupEditProfile.querySelector('.popup__text_type_job');
+const popupNameInput = popupEditProfile.querySelector('.popup__input_type_name');
+const popupJobInput = popupEditProfile.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 const cardTemplate = document.querySelector('#cards-template').content.querySelector('.cards__card');
@@ -15,8 +15,8 @@ const popupAddPlace = document.querySelector('.popup_type_add-place');
 const popupAddPlaceButton = document.querySelector('.profile__add-button');
 const popupCloseAddPlaceButton = popupAddPlace.querySelector('.popup__button-close');
 const formAddPlace = document.querySelector('.popup__form_add-place');
-const popupCardNameInput = document.querySelector('.popup__text_type_card-name');
-const popupLinkInput = document.querySelector('.popup__text_type_link');
+const popupCardNameInput = document.querySelector('.popup__input_type_card-name');
+const popupLinkInput = document.querySelector('.popup__input_type_link');
 // ПОПАП увеличить изображение
 const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
 const popupImage = document.querySelector('.popup__cards-image');
@@ -74,11 +74,23 @@ const closePopup = function(popup) {
   popup.classList.remove('popup_opened');
 }
 
+// закрытие попапов клавишей Esc
+// const keyHandler = function(evt) {
+//   if (evt.key === 'Esc') {
+//     popup.classList.remove('popup_opened');
+//   }
+//   console.log(evt);
+// }
+
 // СЛУШАТЕЛИ
 popupOpenEditButton.addEventListener('click', () => {
   openPopup(popupEditProfile);
   popupNameInput.value = profileName.textContent;
   popupJobInput.value = profileAbout.textContent;
+});
+
+popupCloseEditButton.addEventListener('keydown', function(evt) {
+  console.log(evt);
 });
 
 popupCloseEditButton.addEventListener('click', () => {
