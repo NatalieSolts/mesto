@@ -38,9 +38,17 @@
       <div class="popup__container">
         <button class="popup__button-close button-hover" type="reset"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form action="#" name="popup__form" class="popup__form popup__form_edit-profile">
-            <input type="text" value="Жак-Ив Кусто" class="popup__text popup__text_type_name" name="popup__text_name" placeholder="Имя" required>
-            <input type="text" value="Исследователь океана" class="popup__text popup__text_type_job" name="popup__text_job" placeholder="Описание деятельности" required>
+          <form action="#" name="popup__form" class="popup__form popup__form_edit-profile" novalidate>
+            <label class="popup__input-container">
+              <input type="text" value="Жак-Ив Кусто" class="popup__input popup__input_type_name" name="popup__input_name"
+                     placeholder="Имя" required minlength="2" maxlength="40">
+              <span class="popup__span popup__span_type_error">Ошибка1</span>
+            </label>
+            <label class="popup__input-container">
+              <input type="text" value="Исследователь океана" class="popup__input popup__input_type_job" name="popup__input_job"
+                     placeholder="Описание деятельности" required minlength="2" maxlength="200">
+              <span class="popup__span popup__span_type_error">Ошибка2</span>
+            </label>
             <button class="popup__button-submit button-hover" type="submit">Сохранить</button>
           </form>
       </div>
@@ -50,9 +58,17 @@
       <div class="popup__container">
         <button class="popup__button-close button-hover" type="reset"></button>
           <h2 class="popup__title">Новое место</h2>
-          <form action="#" name="popup__form" class="popup__form popup__form_add-place">
-            <input type="text" value="" class="popup__text popup__text_type_card-name" name="popup__text_card-name" placeholder="Название" required>
-            <input type="url" value="" class="popup__text popup__text_type_link" name="popup__text_link" placeholder="Ссылка на картинку" required>
+          <form action="#" name="popup__form" class="popup__form popup__form_add-place" novalidate>
+            <label class="popup__input-container">
+              <input type="text" value="" class="popup__input popup__input_type_card-name" name="popup__input_card-name"
+                     placeholder="Название" required minlength="1" maxlength="30">
+              <span class="popup__span popup__span_type_error">Текст должен быть не короче 2 симв. Длина текста сейчас: 1 символ.</span>
+            </label>
+            <label class="popup__input-container">
+              <input type="url" value="" class="popup__input popup__input_type_link" name="popup__input_link"
+                     placeholder="Ссылка на картинку" required>
+              <span class="popup__span popup__span_type_error">Текст должен быть не короче 2 симв. Длина текста сейчас: 1 символ.</span>
+            </label>
             <button class="popup__button-submit button-hover" type="submit">Создать</button>
           </form>
       </div>
@@ -79,5 +95,6 @@
   </template>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>
