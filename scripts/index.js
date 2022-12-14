@@ -63,6 +63,13 @@ initialCards.forEach(function(dataCard) {
 // Открытие попапов
 const openPopup = function(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keyup', handleKeyUp);
+}
+
+// Закрытие попапов
+const closePopup = function(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handleKeyUp);
 }
 
 // Закрытие попапов + по клику на оверлэй
@@ -74,11 +81,6 @@ popupList.forEach((popup) => {
   });
 });
 
-// Закрытие попапов
-const closePopup = function(popup) {
-  popup.classList.remove('popup_opened');
-}
-
 // закрытие попапов клавишей Esc
 const handleKeyUp = function(evt) {
   if (evt.key === 'Escape') {
@@ -88,8 +90,6 @@ const handleKeyUp = function(evt) {
 };
 
 // СЛУШАТЕЛИ
-document.addEventListener('keyup', handleKeyUp);
-
 popupOpenEditButton.addEventListener('click', () => {
   openPopup(popupEditProfile);
   popupNameInput.value = profileName.textContent;
