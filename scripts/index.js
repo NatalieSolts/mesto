@@ -112,13 +112,16 @@ const handleFormSubmitEditProfile = (event) => {
 // Возможность добавлять карточки
 const handleFormSubmitAddPlace = (evt) => {
   evt.preventDefault();
-  // создаем объект, который будем передавать в renderCard
+  const submitButton = document.querySelector('.button-submit'); //находим кнопку
+  // создаем объект, который будем передавать в renderCard:
   const cardNew = {
     name: popupCardNameInput.value,
     link: popupLinkInput.value
   }
   renderCard(cardNew, cardsContainer);
-  evt.target.reset(); //Очищает поля формы
+  evt.target.reset(); //Очищаем поля формы
+  submitButton.classList.add('popup__button-submit_disabled');// деактивируем кнопку сохранения
+  submitButton.disabled = true;
   closePopup(popupAddPlace);
 }
 
