@@ -1,3 +1,8 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import { initialCards } from './constants/cards.js';
+import { obj } from './constants/validationObj.js';
+
 const popupList = document.querySelectorAll('.popup');
 const cardsContainer = document.querySelector('.cards__list'); // ul
 // ПОПАП редактировать профиль
@@ -8,7 +13,6 @@ const popupNameInput = popupEditProfile.querySelector('.popup__input_type_name')
 const popupJobInput = popupEditProfile.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
-const cardTemplate = document.querySelector('#cards-template').content.querySelector('.cards__card');
 // ПОПАП добавить новое место
 const popupAddPlace = document.querySelector('.popup_type_add-place');
 const popupAddPlaceButton = document.querySelector('.profile__add-button');
@@ -16,52 +20,17 @@ const formAddPlace = document.querySelector('.popup__form_add-place');
 const popupCardNameInput = document.querySelector('.popup__input_type_card-name');
 const popupLinkInput = document.querySelector('.popup__input_type_link');
 // ПОПАП увеличить изображение
-const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
-const popupImage = document.querySelector('.popup__cards-image');
-const popupImageName = document.querySelector('.popup__cards-name');
+export const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
 
-// Выстраиваем карточки из массива (template)
-const createCard = (dataCard) => {
-  const card = cardTemplate.cloneNode(true);
-  const cardName = card.querySelector('.cards__name');
-  const cardImage = card.querySelector('.cards__image');
-  cardImage.src = dataCard.link;
-  cardImage.alt = dataCard.name;
-  cardName.textContent = dataCard.name;
+// Создание функции валидации
+const formValidatorAddPlace = new FormValidator(obj, popupAddPlace);
+const formValidatorEditProfile = new FormValidator(obj, popupEditProfile);
 
-  // Удалить карточку, поставить лайк
-  const buttonDelete = card.querySelector('.cards__delete');
-  const buttonLike = card.querySelector('.cards__icon-heart');
-
-  buttonDelete.addEventListener('click', function(e) {
-    e.target.closest('.cards__card').remove();
-  });
-
-  buttonLike.addEventListener('click', function(e) {
-    e.target.classList.toggle('cards__icon-heart_is-active');
-  });
-
-  // Открыть картинки в попапе
-  cardImage.addEventListener('click', function () {
-    popupImage.src = dataCard.link;
-    popupImage.alt = dataCard.name;
-    popupImageName.textContent = dataCard.name;
-    openPopup(popupIncreaseImage);
-  });
-  return card;
-}
-
-// Для добавления новой карточки в верстку
-const renderCard = (dataCard, cardContainer) => {
-  const cardNewElement = createCard(dataCard);
-  cardContainer.prepend(cardNewElement);
-}
-initialCards.forEach(function(dataCard) {
-  renderCard(dataCard, cardsContainer);
-});
+formValidatorAddPlace.enableValidation();
+formValidatorEditProfile.enableValidation();
 
 // Открытие попапов
-const openPopup = function(popup) {
+export const openPopup = function(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keyup', handleKeyUp);
 }
@@ -100,15 +69,17 @@ popupAddPlaceButton.addEventListener('click', () => {
   openPopup(popupAddPlace);
 });
 
-// ОБРАБОТЧИКИ СОБЫТИЙ
-// Возможность редактирования имени и информации о себе
-const handleFormSubmitEditProfile = (event) => {
-  event.preventDefault();
-  profileName.textContent = popupNameInput.value;
-  profileAbout.textContent = popupJobInput.value;
-  closePopup(popupEditProfile);
+// Для добавления новой карточки в верстку
+const renderCard = (dataCard, cardContainer) => {
+  const card = new Card(dataCard, '#cards-template');
+  const cardElement = card.createCard();
+  cardContainer.prepend(cardElement);
 }
+initialCards.forEach(function(dataCard) {
+  renderCard(dataCard, cardsContainer);
+});
 
+// ОБРАБОТЧИКИ СОБЫТИЙ
 // Возможность добавлять карточки
 const handleFormSubmitAddPlace = (evt) => {
   evt.preventDefault();
@@ -123,6 +94,14 @@ const handleFormSubmitAddPlace = (evt) => {
   submitButton.classList.add('popup__button-submit_disabled');// деактивируем кнопку сохранения
   submitButton.disabled = true;
   closePopup(popupAddPlace);
+}
+
+// Возможность редактирования имени и информации о себе
+const handleFormSubmitEditProfile = (event) => {
+  event.preventDefault();
+  profileName.textContent = popupNameInput.value;
+  profileAbout.textContent = popupJobInput.value;
+  closePopup(popupEditProfile);
 }
 
 // Прикрепляем обработчики к форме:
