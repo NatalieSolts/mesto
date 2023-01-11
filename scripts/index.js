@@ -108,12 +108,8 @@ const handleFormSubmitAddPlace = (evt) => {
     link: popupLinkInput.value
   }
   renderCard(cardNew, cardsContainer);
-  evt.target.reset(); //Очищаем поля формы
-
-// formValidatorAddPlace.toggleButtonState();
-  submitButton.classList.add('popup__button-submit_disabled');// деактивируем кнопку сохранения
-  submitButton.disabled = true;
-
+  evt.target.reset(); 
+  formValidatorAddPlace.resetValidation(); // управляем кнопкой сабмита и очищаем поля формы от ошибок
   closePopup(popupAddPlace);
 }
 
