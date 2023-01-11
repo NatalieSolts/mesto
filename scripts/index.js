@@ -20,7 +20,9 @@ const formAddPlace = document.querySelector('.popup__form_add-place');
 const popupCardNameInput = document.querySelector('.popup__input_type_card-name');
 const popupLinkInput = document.querySelector('.popup__input_type_link');
 // ПОПАП увеличить изображение
-export const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
+const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
+const popupImage = document.querySelector('.popup__cards-image');
+const popupImageName = document.querySelector('.popup__cards-name');
 
 // Создание функции валидации
 const formValidatorAddPlace = new FormValidator(obj, popupAddPlace);
@@ -29,8 +31,33 @@ const formValidatorEditProfile = new FormValidator(obj, popupEditProfile);
 formValidatorAddPlace.enableValidation();
 formValidatorEditProfile.enableValidation();
 
+// функция для Card.js получает на вход данные карточки:
+const handleCardClick = (name, link) => {
+  popupImage.src = link; // устанавливаем ссылку
+  popupImage.alt = name; // устанавливаем подпись картинке
+  popupImageName.textContent = name;
+  openPopup(popupIncreaseImage); // открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+}
+
+// для создания карточки
+const createCard = (dataCard) => {
+  const card = new Card(dataCard, '#cards-template', handleCardClick);
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+// Для добавления карточки в верстку
+const renderCard = (dataCard, cardContainer) => {
+  const cardElement = createCard(dataCard);
+  cardContainer.prepend(cardElement);
+}
+
+initialCards.forEach(function(dataCard) {
+  renderCard(dataCard, cardsContainer);
+});
+
 // Открытие попапов
-export const openPopup = function(popup) {
+const openPopup = function(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keyup', handleKeyUp);
 }
@@ -66,17 +93,8 @@ popupOpenEditButton.addEventListener('click', () => {
 });
 
 popupAddPlaceButton.addEventListener('click', () => {
+  formValidatorAddPlace.resetValidation(); //для очистки ошибок и управления кнопкой
   openPopup(popupAddPlace);
-});
-
-// Для добавления новой карточки в верстку
-const renderCard = (dataCard, cardContainer) => {
-  const card = new Card(dataCard, '#cards-template');
-  const cardElement = card.createCard();
-  cardContainer.prepend(cardElement);
-}
-initialCards.forEach(function(dataCard) {
-  renderCard(dataCard, cardsContainer);
 });
 
 // ОБРАБОТЧИКИ СОБЫТИЙ
@@ -91,8 +109,11 @@ const handleFormSubmitAddPlace = (evt) => {
   }
   renderCard(cardNew, cardsContainer);
   evt.target.reset(); //Очищаем поля формы
+
+// formValidatorAddPlace.toggleButtonState();
   submitButton.classList.add('popup__button-submit_disabled');// деактивируем кнопку сохранения
   submitButton.disabled = true;
+
   closePopup(popupAddPlace);
 }
 

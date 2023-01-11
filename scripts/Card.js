@@ -1,10 +1,11 @@
-import { popupIncreaseImage, openPopup } from './index.js'
+// import { openPopup } from './index.js'
 
 export default class Card {
-  constructor(dataCard, selector) {
+  constructor(dataCard, selector, handleCardClick) {
     this._name = dataCard.name;
     this._link = dataCard.link;
     this._selector = selector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -23,6 +24,9 @@ export default class Card {
     this._cardName = this._card.querySelector('.cards__name');
     this._cardImage = this._card.querySelector('.cards__image');
 
+    this._likeButton = this._card.querySelector('.cards__icon-heart');
+    this._deleteButton = this._card.querySelector('.cards__delete');
+
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardName.textContent = this._name;
@@ -33,29 +37,32 @@ export default class Card {
   }
 
   _likeClick() {
-    this._card.querySelector('.cards__icon-heart').classList.toggle('cards__icon-heart_is-active');
+    this._likeButton.classList.toggle('cards__icon-heart_is-active');
   }
 
   _deleteClick() {
-    this._card.querySelector('.cards__delete').closest('.cards__card').remove();
+    this._deleteButton.closest('.cards__card').remove();
   }
 
-  _openImage() {
-      document.querySelector('.popup__cards-image').src = this._link;
-      document.querySelector('.popup__cards-image').alt = this._name;
-      document.querySelector('.popup__cards-name').textContent = this._name;
-      openPopup(popupIncreaseImage);
-    };
+  // _openImage() {
+  //   this._popupCardImage.src = this._link;
+  //   this._popupCardImage.alt = this._name;
+  //   this._popupCardName.textContent = this._name;
+    // openPopup(popupIncreaseImage);
+  // };
 
-  _setEventListeners () {
-    this._card.querySelector('.cards__icon-heart').addEventListener('click', () => {
+  _setEventListeners = () => {
+    this._likeButton.addEventListener('click', () => {
       this._likeClick();
     });
-    this._card.querySelector('.cards__delete').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._deleteClick();
     });
+    // this._cardImage.addEventListener('click', () => {
+    //   this._openImage();
+    // });
     this._cardImage.addEventListener('click', () => {
-      this._openImage();
+      this._handleCardClick(this._name, this._link);
     });
   };
 }
