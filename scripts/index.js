@@ -1,10 +1,14 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import { initialCards } from './constants/cards.js';
-import { obj } from './constants/validationObj.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import Section from './components/Section.js';
+import { obj } from './utils/validationObj.js';
+import {
+  initialCards,
+  cardListSelector
+} from './utils/constants.js';
 
 const popupList = document.querySelectorAll('.popup');
-const cardsContainer = document.querySelector('.cards__list'); // ul
+export const cardsContainer = document.querySelector('.cards__list'); // ul
 // ПОПАП редактировать профиль
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupOpenEditButton = document.querySelector('.profile__edit-button');
@@ -39,22 +43,36 @@ const handleCardClick = (name, link) => {
   openPopup(popupIncreaseImage); // открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
 }
 
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (dataCard) => { //функция - Отрисовка каждого отдельного элемента
+    const card = new Card(dataCard, '#cards-template', handleCardClick);
+    const cardElement = card.createCard();
+    cardList.addCard(cardElement);
+  }
+}, cardListSelector); // Контейнер для добавления карточек
+
+cardList.renderCards();
+
+
 // для создания карточки
-const createCard = (dataCard) => {
-  const card = new Card(dataCard, '#cards-template', handleCardClick);
-  const cardElement = card.createCard();
-  return cardElement;
-}
+// const createCard = (dataCard) => {
+//   const card = new Card(dataCard, '#cards-template', handleCardClick);
+//   const cardElement = card.createCard();
+//   return cardElement;
+// }
 
-// Для добавления карточки в верстку
-const renderCard = (dataCard, cardContainer) => {
-  const cardElement = createCard(dataCard);
-  cardContainer.prepend(cardElement);
-}
+// // Для добавления карточки в верстку
+// const renderCard = (dataCard, cardContainer) => {
+//   const cardElement = createCard(dataCard);
+//   cardContainer.prepend(cardElement);
+// }
 
-initialCards.forEach(function(dataCard) {
-  renderCard(dataCard, cardsContainer);
-});
+// initialCards.forEach(function(dataCard) {
+//   renderCard(dataCard, cardsContainer);
+// });
+
 
 // Открытие попапов
 const openPopup = function(popup) {
