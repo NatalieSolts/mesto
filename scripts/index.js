@@ -2,6 +2,7 @@ import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
+import PopupWithImage from './components/PopupWithImage.js';
 import { obj } from './utils/validationObj.js';
 import {
   initialCards,
@@ -27,9 +28,9 @@ const formAddPlace = document.querySelector('.popup__form_add-place');
 const popupCardNameInput = document.querySelector('.popup__input_type_card-name');
 const popupLinkInput = document.querySelector('.popup__input_type_link');
 // ПОПАП увеличить изображение
-const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
-const popupImage = document.querySelector('.popup__cards-image');
-const popupImageName = document.querySelector('.popup__cards-name');
+// const popupIncreaseImage = document.querySelector('.popup_type_increase-img');
+// const popupImage = document.querySelector('.popup__cards-image');
+// const popupImageName = document.querySelector('.popup__cards-name');
 
 // Создание функции валидации
 const formValidatorAddPlace = new FormValidator(obj, popupAddPlace);
@@ -40,10 +41,11 @@ formValidatorEditProfile.enableValidation();
 
 // функция для Card.js получает на вход данные карточки:
 const handleCardClick = (name, link) => {
-  popupImage.src = link; // устанавливаем ссылку
-  popupImage.alt = name; // устанавливаем подпись картинке
-  popupImageName.textContent = name;
-  openPopup(popupIncreaseImage); // открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
+  popupWithImage.openPopup(name, link);
+  // popupImage.src = link; // устанавливаем ссылку
+  // popupImage.alt = name; // устанавливаем подпись картинке
+  // popupImageName.textContent = name;
+  // openPopup(popupIncreaseImage); // открываем попап универсальной функцией, которая навешивает обработчик Escape внутри себя
 }
 
 
@@ -110,9 +112,12 @@ cardList.renderCards();
 
 const addPlacePopup = new Popup('.popup_type_add-place');
 const editProfilePopup = new Popup('.popup_type_edit-profile');
+const popupWithImage = new PopupWithImage('.popup_type_increase-img');
 
 addPlacePopup.setEventListeners();
 editProfilePopup.setEventListeners();
+popupWithImage.setEventListeners();
+
 
 // СЛУШАТЕЛИ
 popupOpenEditButton.addEventListener('click', () => {
