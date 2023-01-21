@@ -1,24 +1,27 @@
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
+import Popup from './components/Popup.js';
 import { obj } from './utils/validationObj.js';
 import {
   initialCards,
   cardListSelector
 } from './utils/constants.js';
 
-const popupList = document.querySelectorAll('.popup');
+// const popupList = document.querySelectorAll('.popup');
 export const cardsContainer = document.querySelector('.cards__list'); // ul
 // ПОПАП редактировать профиль
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-const popupOpenEditButton = document.querySelector('.profile__edit-button');
+const popupOpenEditButton = document.querySelector('.profile__edit-button'); // vv
+
 const formEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
 const popupNameInput = popupEditProfile.querySelector('.popup__input_type_name');
 const popupJobInput = popupEditProfile.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 // ПОПАП добавить новое место
-const popupAddPlace = document.querySelector('.popup_type_add-place');
+const popupAddPlace = document.querySelector('.popup_type_add-place'); //
+
 const popupAddPlaceButton = document.querySelector('.profile__add-button');
 const formAddPlace = document.querySelector('.popup__form_add-place');
 const popupCardNameInput = document.querySelector('.popup__input_type_card-name');
@@ -75,44 +78,54 @@ cardList.renderCards();
 
 
 // Открытие попапов
-const openPopup = function(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keyup', handleKeyUp);
-}
+// const openPopup = function(popup) {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keyup', handleKeyUp);
+// }
 
 // Закрытие попапов
-const closePopup = function(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keyup', handleKeyUp);
-}
+// const closePopup = function(popup) {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keyup', handleKeyUp);
+// }
 
 // Закрытие попапов + по клику на оверлэй
-popupList.forEach((popup) => {
-  popup.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('popup') || e.target.classList.contains('popup__button-close')) {
-      closePopup(popup);
-    };
-  });
-});
+// popupList.forEach((popup) => {
+
+  // popup.addEventListener('mousedown', (e) => {
+  //   if (e.target.classList.contains('popup') || e.target.classList.contains('popup__button-close')) {
+  //     closePopup(popup);
+    // };
+  // });
+// });
 
 // закрытие попапов клавишей Esc
-const handleKeyUp = function(evt) {
-  if (evt.key === 'Escape') {
-    const openPopup = document.querySelector('.popup_opened');
-    closePopup(openPopup);
-  };
-};
+// const handleKeyUp = function(evt) {
+//   if (evt.key === 'Escape') {
+//     const openPopup = document.querySelector('.popup_opened');
+//     closePopup(openPopup);
+//   };
+// };
+
+
+const addPlacePopup = new Popup('.popup_type_add-place');
+const editProfilePopup = new Popup('.popup_type_edit-profile');
+
+addPlacePopup.setEventListeners();
+editProfilePopup.setEventListeners();
 
 // СЛУШАТЕЛИ
 popupOpenEditButton.addEventListener('click', () => {
-  openPopup(popupEditProfile);
+  editProfilePopup.openPopup();
+  // openPopup(popupEditProfile);
   popupNameInput.value = profileName.textContent;
   popupJobInput.value = profileAbout.textContent;
 });
 
 popupAddPlaceButton.addEventListener('click', () => {
   formValidatorAddPlace.resetValidation(); //для очистки ошибок и управления кнопкой
-  openPopup(popupAddPlace);
+  addPlacePopup.openPopup();
+  // openPopup(popupAddPlace);
 });
 
 // ОБРАБОТЧИКИ СОБЫТИЙ
@@ -128,7 +141,8 @@ const handleFormSubmitAddPlace = (evt) => {
   renderCard(cardNew, cardsContainer);
   evt.target.reset();
   formValidatorAddPlace.resetValidation(); // управляем кнопкой сабмита и очищаем поля формы от ошибок
-  closePopup(popupAddPlace);
+  addPlacePopup.closePopup();
+  // closePopup(popupAddPlace);
 }
 
 // Возможность редактирования имени и информации о себе
@@ -136,7 +150,8 @@ const handleFormSubmitEditProfile = (event) => {
   event.preventDefault();
   profileName.textContent = popupNameInput.value;
   profileAbout.textContent = popupJobInput.value;
-  closePopup(popupEditProfile);
+  editProfilePopup.closePopup();
+  // closePopup(popupEditProfile);
 }
 
 // Прикрепляем обработчики к форме:
