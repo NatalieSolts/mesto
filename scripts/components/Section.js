@@ -1,3 +1,4 @@
+// класс Section отвечает за отрисовку элементов на странице
 export default class Section {
   constructor( {items, renderer}, containerSelector) {
     this._initialCards = items;
