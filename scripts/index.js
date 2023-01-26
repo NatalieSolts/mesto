@@ -8,17 +8,11 @@ import { obj } from './utils/validationObj.js';
 import {
   initialCards,
   cardListSelector, // Контейнер для добавления карточек
-  // cardsContainer,
   popupEditProfile,
   popupOpenEditButton,
   popupAddPlace,
   popupAddPlaceButton,
-  // popupCardNameInput,
-  // popupLinkInput
 } from './utils/constants.js';
-
-// /*export*/ const popupNameInput = popupEditProfile.querySelector('.popup__input_type_name');
-// /*export*/ const popupJobInput = popupEditProfile.querySelector('.popup__input_type_job');
 
 // --- ЭКЗЕМПЛЯРЫ ---
 
@@ -75,12 +69,6 @@ function handleFormSubmitEditProfile(evt, values) {
 // Возможность добавлять карточки
 function handleFormSubmitAddPlace(evt, dataCard) {
   evt.preventDefault();
-    // создаем объект, который будем передавать в renderCard:
-  // const cardNew = {
-  //   name: popupCardNameInput.value,
-  //   link: popupLinkInput.value
-  // }
-  // renderCard(cardNew, cardsContainer);
   renderCard(dataCard);
   formValidatorAddPlace.resetValidation(); // управляем кнопкой сабмита и очищаем поля формы от ошибок
   addPlacePopup.closePopup();
