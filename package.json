@@ -1,0 +1,33 @@
+{
+  "name": "yandex.praktikum",
+  "version": "0.0.1",
+  "description": "Проект создан в рамках обучения в [Яндекс.Практикуме](https://practicum.yandex.ru/) по программе Веб-разработчик. _Сервис Mesto_: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NatalieSolts/mesto.git"
+  },
+  "author": "Natalia Solts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NatalieSolts/mesto/issues"
+  },
+  "homepage": "https://github.com/NatalieSolts/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "core-js": "^3.27.2"
+  }
+}
