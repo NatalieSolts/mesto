@@ -1,6 +1,7 @@
 const path = require('path'); // подключаем path к конфигу вебпак. Она нужна, чтобы подключить к проекту новые методы для работы с путём.
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключаем плагин
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //плагин, который будет каждый раз при сборке проекта удалять содержимое папки dist
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // плагин объединяет много css-файлов в один
 
 // module.exports — это синтаксис экспорта в Node.js
 module.exports = {
@@ -19,21 +20,23 @@ module.exports = {
     open: true // сайт будет открываться сам при запуске npm run dev
   },
   module: {
-    rules: [ // rules — это массив правил
-      // добавим в него объект правил для бабеля
+    rules: [
+      // добавим объект правил для бабеля
       {
-        // регулярное выражение, которое ищет все js файлы
-        test: /\.js$/,
-        // при обработке этих файлов нужно использовать babel-loader
-        use: 'babel-loader',
-        // исключает папку node_modules, файлы в ней обрабатывать не нужно
-        exclude: '/node_modules/'
+        test: /\.js$/, // регулярное выражение, которое ищет все js файлы
+        use: 'babel-loader', // при обработке этих файлов нужно использовать babel-loader
+        exclude: '/node_modules/' // исключает папку node_modules, файлы в ней обрабатывать не нужно
       },
       {
-        // регулярное выражение, которое ищет все файлы с такими расширениями
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/, // регулярное выражение, которое ищет все файлы с такими расширениями
         type: 'asset/resource'
       },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, {
+          loader: 'css-loader'
+        }]
+      }
     ]
   },
 
@@ -42,5 +45,6 @@ module.exports = {
       template: './src/index.html' // путь к файлу index.html
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin() // подключение плагина для объединения файлов
   ]
 }
