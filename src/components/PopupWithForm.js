@@ -30,8 +30,8 @@ export default class PopupWithForm extends Popup {
   }
 
   // при закрытии попапа форма должна ещё и сбрасываться
-  closePopup() {
-    super.closePopup();
+  close() {
+    super.close();
     this._form.reset();
   }
 

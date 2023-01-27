@@ -43,7 +43,7 @@ function renderCard(dataCard) {
 
 // открывает попап с картинкой при клике на карточку
 function handleCardClick(name, link) {
-  popupWithImage.openPopup(name, link);
+  popupWithImage.open(name, link);
 }
 
 // открывает попап редактирования профиля
@@ -51,20 +51,20 @@ const handleFormEditProfileOpen = () => {
   const { name, job } = userInfo.getUserInfo();
   editProfilePopup.setFormValues({ name, job });
   formValidatorEditProfile.resetValidation(); //для очистки ошибок и управления кнопкой
-  editProfilePopup.openPopup();
+  editProfilePopup.open();
 }
 
 // открывает попап добавления карточки
 const handleFormAddPlaceOpen = () => {
   formValidatorAddPlace.resetValidation();
-  addPlacePopup.openPopup();
+  addPlacePopup.open();
 }
 
 // Возможность редактирования имени и информации о себе
 function handleFormSubmitEditProfile(evt, values) {
   evt.preventDefault();
   userInfo.setUserInfo(values.name, values.job);
-  editProfilePopup.closePopup();
+  editProfilePopup.close();
 }
 
 // Возможность добавлять карточки
@@ -72,7 +72,7 @@ function handleFormSubmitAddPlace(evt, dataCard) {
   evt.preventDefault();
   renderCard(dataCard);
   formValidatorAddPlace.resetValidation(); // управляем кнопкой сабмита и очищаем поля формы от ошибок
-  addPlacePopup.closePopup();
+  addPlacePopup.close();
 }
 
 cardSection.renderCards();
