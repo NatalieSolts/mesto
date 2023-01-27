@@ -5,7 +5,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import { obj } from '../utils/validationObj.js';
+import { validationConfig } from '../utils/validationConfig.js';
 import {
   initialCards,
   cardListSelector, // Контейнер для добавления карточек
@@ -17,8 +17,8 @@ import {
 
 // --- ЭКЗЕМПЛЯРЫ ---
 
-const formValidatorAddPlace = new FormValidator(obj, popupAddPlace);
-const formValidatorEditProfile = new FormValidator(obj, popupEditProfile);
+const formValidatorAddPlace = new FormValidator(validationConfig, popupAddPlace);
+const formValidatorEditProfile = new FormValidator(validationConfig, popupEditProfile);
 const popupWithImage = new PopupWithImage('.popup_type_increase-img');
 const addPlacePopup = new PopupWithForm('.popup_type_add-place', handleFormSubmitAddPlace);
 const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', handleFormSubmitEditProfile);

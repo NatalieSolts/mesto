@@ -1,4 +1,4 @@
-export const obj = {
+export const validationConfig = {
   formSelector: '.popup__form', //селектор формы
   inputSelector: '.popup__input', //селектор инпутов внутри этой формы
   submitButtonSelector: '.popup__button-submit',  //селектор кнопки сабмита этой формы
