@@ -1,11 +1,11 @@
-import '../pages/index.css'; // добавьте импорт главного файла стилей
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
-import { obj } from './utils/validationObj.js';
+import './index.css'; // добавили импорт главного файла стилей
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import { obj } from '../utils/validationObj.js';
 import {
   initialCards,
   cardListSelector, // Контейнер для добавления карточек
@@ -13,7 +13,7 @@ import {
   popupOpenEditButton,
   popupAddPlace,
   popupAddPlaceButton,
-} from './utils/constants.js';
+} from '../utils/constants.js';
 
 // --- ЭКЗЕМПЛЯРЫ ---
 
