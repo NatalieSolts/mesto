@@ -1,4 +1,5 @@
 import './index.css'; // добавили импорт главного файла стилей
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -16,6 +17,27 @@ import {
 } from '../utils/constants.js';
 
 // --- ЭКЗЕМПЛЯРЫ ---
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
+  headers: {
+    authorization: '93a90e29-0cdc-487a-9ed4-31b8026d8e92',
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getUserInfo()
+.then(res => {
+  console.log('рез1 - ', res)
+})
+
+api.getInitialCards()
+  .then(res => {
+    console.log('результат1 - ', res)
+  })
+  .catch((err) => {
+    console.log('результат2 - ', err)
+  })
 
 const formValidatorAddPlace = new FormValidator(validationConfig, popupAddPlace);
 const formValidatorEditProfile = new FormValidator(validationConfig, popupEditProfile);
