@@ -1,52 +1,92 @@
-// Создан класс Api , внутри которого описаны запросы к серверу. Запросы к серверу не должны быть описаны
-// внутри других классов или index.js
-// Каждый метод, включающий обращение к серверу содержит return fetch , т.е возвращает объект Promise
-// Все операции над DOM включены внутрь цепочки промисов.
-// Ответ от сервера всегда проверяется на корректность:
-// .then(res => {
-// if (res.ok) {
-// return res.json();
-// }
-// // если ошибка, отклоняем промис
-// return Promise.reject(`Ошибка: ${res.status}`);
-// });
-// Каждый промис содержит обработку ошибок после обращения к серверу.
-// Внутри класса Api не создаются экземпляры других классов, не вызываются методы других классов.
-// Используется слабое связывание между классами.
-
+// Класс Api , внутри которого описаны запросы к серверу
 
 export default class Api {
-    constructor(options) {
-      this._baseUrl = options.baseUrl;
-      this._headers = options.headers;
-    }
-
-    getUserInfo() {
-      return fetch(`${this._baseUrl}/users/me`, {
-        headers: this._headers
-      })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
-
-      .then((res) => {
-        console.log(res)
-      })
-    }
-
-    getInitialCards() {
-      return fetch(`${this._baseUrl}/cards/`, {
-          headers: this._headers
-      })
-
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
-
-      .then((res) => {
-        console.log(res)
-      })
-    }
-
-    // другие методы работы с API
+  constructor(options) {
+    this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
   }
 
+  // Загрузка информации о пользователе с сервера
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers
+    })
+    // если ошибка, отклоняем промис:
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+  }
 
+   // Редактирование профиля
+  sendUserInfo(userData) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: userData.name,
+        about: userData.job
+      })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
+  // Загрузка карточек с сервера
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards/`, {
+        headers: this._headers
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
+  // Добавление новой карточки
+  addNewCard(name, link) {
+    return fetch(`${this._baseUrl}/cards/`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
+  // Удаление карточки
+  deleteCard(_id) {
+    return fetch(`${this._baseUrl}/cards/`+ _id, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
+  // Постановка лайка карточки
+  addLike(_id) {
+    return fetch(`${this._baseUrl}/cards/likes/`+ _id, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
+  // Снятие лайка
+  deleteLike(_id) {
+    return fetch(`${this._baseUrl}/cards/likes/`+ _id, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
+  // Обновление аватара пользователя
+  updateAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar/`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: `${data.avatar}`
+      })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+}
 
 
