@@ -17,11 +17,14 @@
     </header>
    <main class="content">
      <section class="profile">
-      <img src="<%=require('./image/profile-avatar.jpg')%>" alt="Аватар пользователя" class="profile__avatar">
+      <button class="profile__avatar-button">
+        <!-- <img src="<%=require('./image/profile-avatar.jpg')%>" alt="Аватар пользователя" class="profile__avatar"> -->
+        <img src="#" alt="Аватар пользователя" class="profile__avatar">
+      </button>
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <h1 class="profile__name"></h1>
         <button class="profile__edit-button button-hover" type="button"></button>
-        <p class="profile__about">Исследователь океана</p>
+        <p class="profile__about"></p>
       </div>
       <button class="profile__add-button button-hover" type="button"></button>
      </section>
@@ -104,6 +107,35 @@
       </div>
     </section>
   </div>
+  <!-- Попап подтверждения удаления карточки -->
+  <section class="popup popup_type_delete-card-confirmation">
+    <div class="popup__container">
+      <button class="popup__button-close button-hover" type="reset"></button>
+      <h2 class="popup__title">Вы&nbsp;уверены?</h2>
+      <form action="#" name="popup__form" class="popup__form popup__form_delete-card-confirmation" novalidate>
+        <button class="popup__button-submit button-hover" type="submit">Да</button>
+      </form>
+    </div>
+  </section>
+  <!-- Попап обновления аватарки -->
+  <section class="popup popup_type_update-avatar">
+    <div class="popup__container">
+      <button class="popup__button-close button-hover" type="reset"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form action="#" name="popup__form" class="popup__form popup__form_update-avatar" novalidate>
+        <input
+            type="url"
+            value=""
+            class="popup__input popup__input_type_link"
+            name="avatar"
+            placeholder="Ссылка на картинку"
+            required
+            id="avatar">
+          <span class="popup__error avatar-error"></span>
+        <button class="popup__button-submit button-hover" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
   <!-- Template -->
   <template id="cards-template">
     <li class="cards__card">
