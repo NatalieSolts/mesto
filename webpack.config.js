@@ -46,6 +46,7 @@ module.exports = {
       },
     ]
   },
+  devtool: 'eval-source-map', //Чтобы в консоли всегда была правильная строка ошибки
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html' // путь к файлу index.html
