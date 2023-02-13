@@ -69,7 +69,8 @@ export default class Card {
   }
 
   deleteClick() {
-    this._deleteButton.closest('.cards__card').remove();
+    this._card.remove()
+    this._card = null
   }
 
    _setEventListeners = () => {

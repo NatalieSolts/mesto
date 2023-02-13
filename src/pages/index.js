@@ -66,12 +66,13 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const createCard = (dataCard) => {
   const card = new Card(dataCard, userInfo.getUserId(), '#cards-template', handleCardClick,
   {
-    handleDeleteCard: (_id) => {
-      console.log('это id карточки =>',_id)
+    handleDeleteCard: () => {
+      // console.log('это id карточки =>',_id)      
       popupWithConfirmation.open();
       popupWithConfirmation.handleFormSubmitConfirmation(() => {
         popupWithConfirmation.setButtonText('Удаление...')
-        api.deleteCard(_id)
+        console.log('это id карточки =>', dataCard._id)
+        api.deleteCard(dataCard._id)
           .then(() => {
             card.deleteClick()
             popupWithConfirmation.close();
