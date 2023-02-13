@@ -106,36 +106,36 @@
         <h2 class="popup__cards-name"></h2>
       </div>
     </section>
+    <!-- Попап подтверждения удаления карточки -->
+    <section class="popup popup_type_delete-card-confirmation">
+      <div class="popup__container">
+        <button class="popup__button-close button-hover" type="reset"></button>
+        <h2 class="popup__title">Вы&nbsp;уверены?</h2>
+        <form action="#" name="popup__form" class="popup__form popup__form_delete-card-confirmation" novalidate>
+          <button class="popup__button-submit button-hover" type="submit">Да</button>
+        </form>
+      </div>
+    </section>
+    <!-- Попап обновления аватарки -->
+    <section class="popup popup_type_update-avatar">
+      <div class="popup__container">
+        <button class="popup__button-close button-hover" type="reset"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form action="#" name="popup__form" class="popup__form popup__form_update-avatar" novalidate>
+          <input
+              type="url"
+              value=""
+              class="popup__input popup__input_type_avatar"
+              name="avatar"
+              placeholder="Ссылка на картинку"
+              required
+              id="avatar">
+            <span class="popup__error avatar-error"></span>
+          <button class="popup__button-submit button-hover" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
   </div>
-  <!-- Попап подтверждения удаления карточки -->
-  <section class="popup popup_type_delete-card-confirmation">
-    <div class="popup__container">
-      <button class="popup__button-close button-hover" type="reset"></button>
-      <h2 class="popup__title">Вы&nbsp;уверены?</h2>
-      <form action="#" name="popup__form" class="popup__form popup__form_delete-card-confirmation" novalidate>
-        <button class="popup__button-submit button-hover" type="submit">Да</button>
-      </form>
-    </div>
-  </section>
-  <!-- Попап обновления аватарки -->
-  <section class="popup popup_type_update-avatar">
-    <div class="popup__container">
-      <button class="popup__button-close button-hover" type="reset"></button>
-      <h2 class="popup__title">Обновить аватар</h2>
-      <form action="#" name="popup__form" class="popup__form popup__form_update-avatar" novalidate>
-        <input
-            type="url"
-            value=""
-            class="popup__input popup__input_type_avatar"
-            name="avatar"
-            placeholder="Ссылка на картинку"
-            required
-            id="avatar">
-          <span class="popup__error avatar-error"></span>
-        <button class="popup__button-submit button-hover" type="submit">Сохранить</button>
-      </form>
-    </div>
-  </section>
   <!-- Template -->
   <template id="cards-template">
     <li class="cards__card">
