@@ -28,6 +28,18 @@ export default class Api {
     .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
   }
 
+  // Обновление аватара пользователя
+  updateAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar/`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+  }
+
   // Загрузка карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards/`, {
@@ -76,17 +88,7 @@ export default class Api {
     .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
   }
 
-  // Обновление аватара пользователя
-  updateAvatar(data) {
-    return fetch(`${this._baseUrl}/users/me/avatar/`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: `${data.avatar}`
-      })
-    })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
-  }
+
 }
 
 

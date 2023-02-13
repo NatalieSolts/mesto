@@ -5,11 +5,11 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import { validationConfig } from '../utils/validationConfig.js';
 import {
-  // initialCards,
   cardListSelector, // Контейнер для добавления карточек
   popupEditProfile,
   popupOpenEditButton,
@@ -31,7 +31,7 @@ const popupAddCard = new PopupWithForm('.popup_type_add-place', handleFormSubmit
 const popupProfileEdit = new PopupWithForm('.popup_type_edit-profile', handleFormSubmitEditProfile);
 const popupUpdateAvatar = new PopupWithForm('.popup_type_update-avatar', handleFormSubmitUpdateAvatar);
 
-// const popupWithConfirmation = new popupWithConfirmation('.popup_type_delete-card-confirmation');
+const popupWithConfirmation = new PopupWithConfirmation('.popup_type_delete-card-confirmation');
 
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
@@ -68,10 +68,19 @@ const createCard = (dataCard) => {
   {
     handleDeleteCard: (_id) => {
       popupWithConfirmation.open();
-      api.deleteCard(_id)
-        .then(() => {
-          card.deleteClick()
-        })
+      popupWithConfirmation.handleFormSubmitConfirmation(() => {
+        popupWithConfirmation.setButtonText('Удаление...')
+        api.deleteCard(_id)
+          .then((res) => {
+            console.log(res)
+            card.deleteClick()
+            popupWithConfirmation.close();
+          })
+          .catch(err => console.log(err))
+          .finally(() => {
+            popupWithConfirmation.setButtonText('Да')
+          })
+      })
     },
     handleLikeClick: (_id) => {
       if (card.checkIfCardIsLiked() !== true) {
@@ -129,12 +138,11 @@ popupUpdateAvatar.setButtonText('Сохранение...')
 api.updateAvatar(avatar)
   .then((res) => {
     console.log(res)
-    // userInfo.setUserInfo(res);
-    // formValidatorUpdateAvatar.resetValidation()
+    userInfo.setUserInfo(res);
     popupUpdateAvatar.close();
   })
-  // .catch(err => console.log(err))
-  // .finally(() => popupUpdateAvatar.setButtonText('Сохранить'))
+  .catch(err => console.log(err))
+  .finally(() => popupUpdateAvatar.setButtonText('Сохранить'))
 }
 
 // Возможность редактирования имени и информации о себе
@@ -142,8 +150,8 @@ function handleFormSubmitEditProfile(evt, userData) {
   evt.preventDefault();
   popupProfileEdit.setButtonText('Сохранение...')
   api.sendUserInfo(userData)
-    .then((newUserData) => {
-      userInfo.setUserInfo(newUserData);
+    .then((res) => {
+      userInfo.setUserInfo(res);
       popupProfileEdit.close();
     })
     .catch(err => console.log(err))
@@ -163,7 +171,6 @@ function handleFormSubmitAddPlace(evt, {name, link}) {
     .finally(() => popupAddCard.setButtonText('Создать'))
 }
 
-// cardSection.renderCards();
 formValidatorAddPlace.enableValidation();
 formValidatorEditProfile.enableValidation();
 formValidatorUpdateAvatar.enableValidation();
@@ -171,6 +178,7 @@ popupWithImage.setEventListeners();
 popupAddCard.setEventListeners();
 popupProfileEdit.setEventListeners();
 popupUpdateAvatar.setEventListeners();
+popupWithConfirmation.setEventListeners();
 
 // --- СЛУШАТЕЛИ ---
 popupOpenEditButton.addEventListener('click', handleFormEditProfileOpen);
