@@ -29,12 +29,12 @@ export default class Api {
   }
 
   // Обновление аватара пользователя
-  updateAvatar(data) {
+  updateAvatar(userData) {
     return fetch(`${this._baseUrl}/users/me/avatar/`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar
+        avatar: userData.avatar
       })
     })
     .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))

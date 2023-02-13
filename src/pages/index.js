@@ -67,6 +67,7 @@ const createCard = (dataCard) => {
   const card = new Card(dataCard, userInfo.getUserId(), '#cards-template', handleCardClick,
   {
     handleDeleteCard: (_id) => {
+      console.log('это id карточки =>',_id)
       popupWithConfirmation.open();
       popupWithConfirmation.handleFormSubmitConfirmation(() => {
         popupWithConfirmation.setButtonText('Удаление...')
@@ -133,9 +134,11 @@ const handleFormUpdateAvatarOpen = () => {
 }
 
 // Возможность обновления аватара
-function handleFormSubmitUpdateAvatar(avatar) {
+function handleFormSubmitUpdateAvatar(evt, userData) {
+  evt.preventDefault();
+  console.log('то, что в параметре ф-ции =>', userData)
 popupUpdateAvatar.setButtonText('Сохранение...')
-api.updateAvatar(avatar)
+api.updateAvatar(userData)
   .then((res) => {
     console.log(res)
     userInfo.setUserInfo(res);

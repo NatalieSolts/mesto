@@ -28,4 +28,8 @@ export default class UserInfo {
     this._userId = userData._id;
     this._userAvatar.src = userData.avatar;
   }
+
+  setUserAvatar() {
+    return this._userAvatar.src;
+  }
 }
