@@ -45,11 +45,4 @@ export default class PopupWithForm extends Popup {
       }
     });
   }
-
-  //  уведомление пользователя о процессе загрузки,
-  // меняется текст кнопки на: «Сохранение...»,
-  // пока данные загружаются:
-  setButtonText(text) {
-    this._button.textContent = text;
-  }
 }
