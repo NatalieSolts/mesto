@@ -72,8 +72,7 @@ const createCard = (dataCard) => {
       popupWithConfirmation.handleFormSubmitConfirmation(() => {
         popupWithConfirmation.setButtonText('Удаление...')
         api.deleteCard(_id)
-          .then((res) => {
-            console.log(res)
+          .then(() => {
             card.deleteClick()
             popupWithConfirmation.close();
           })
