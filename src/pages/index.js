@@ -165,6 +165,7 @@ function handleFormSubmitAddPlace(evt, {name, link}) {
       formValidatorAddPlace.resetValidation() // управляем кнопкой сабмита и очищаем поля формы от ошибок
       popupAddCard.close()
     })
+    .catch(err => console.log(err))
     .finally(() => popupAddCard.setButtonText('Создать'))
 }
 
