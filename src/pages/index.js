@@ -80,7 +80,7 @@ const createCard = (dataCard) => {
       })
     },
     handleLikeClick: (_id) => {
-      if (card.checkIfCardIsLiked() !== true) {
+      if (card.isLiked() !== true) {
         api.addLike(_id)
         .then(res => {
           card.likesCounter(res.likes)
