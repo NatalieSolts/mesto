@@ -56,9 +56,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo(userRes);
     cardSection.renderCards(cardsRes.reverse());
   })
-  .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+  .catch(err => console.log(err))
 
 // --- ФУНКЦИИ ---
 
@@ -66,13 +64,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const createCard = (dataCard) => {
   const card = new Card(dataCard, userInfo.getUserId(), '#cards-template', handleCardClick,
   {
-    handleDeleteCard: () => {
-      // console.log('это id карточки =>',_id)      
+    handleDeleteCard: (_id) => {
       popupWithConfirmation.open();
       popupWithConfirmation.handleFormSubmitConfirmation(() => {
         popupWithConfirmation.setButtonText('Удаление...')
-        console.log('это id карточки =>', dataCard._id)
-        api.deleteCard(dataCard._id)
+        api.deleteCard(_id)
           .then(() => {
             card.deleteClick()
             popupWithConfirmation.close();
@@ -136,11 +132,9 @@ const handleFormUpdateAvatarOpen = () => {
 // Возможность обновления аватара
 function handleFormSubmitUpdateAvatar(evt, userData) {
   evt.preventDefault();
-  console.log('то, что в параметре ф-ции =>', userData)
 popupUpdateAvatar.setButtonText('Сохранение...')
 api.updateAvatar(userData)
   .then((res) => {
-    console.log(res)
     userInfo.setUserInfo(res);
     popupUpdateAvatar.close();
   })
@@ -164,7 +158,7 @@ function handleFormSubmitEditProfile(evt, userData) {
 // Возможность добавлять карточки
 function handleFormSubmitAddPlace(evt, {name, link}) {
   evt.preventDefault();
-  popupAddCard.setButtonText('Сохранение...') //  уведомленик пользователя о процессе загрузки
+  popupAddCard.setButtonText('Сохранение...') //  уведомление пользователя о процессе загрузки
   api.addNewCard(name, link)
     .then(res => {
       renderCard(res)

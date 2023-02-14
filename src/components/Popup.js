@@ -2,6 +2,7 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    this._button = this._popup.querySelector('.popup__button-submit');
   }
 
 // открытие попапа
@@ -33,8 +34,7 @@ export default class Popup {
   }
 
   //  уведомление пользователя о процессе загрузки,
-  // меняется текст кнопки на: «Сохранение...»,
-  // пока данные загружаются:
+  // меняется текст кнопки на: «Сохранение...», пока данные загружаются:
   setButtonText(text) {
     this._button.textContent = text;
   }
