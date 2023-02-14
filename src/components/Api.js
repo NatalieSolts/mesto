@@ -6,13 +6,19 @@ export default class Api {
     this._headers = options.headers;
   }
 
+   // Проверка ответа сервера и преобразование из json
+  _getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+}
   // Загрузка информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-    // если ошибка, отклоняем промис:
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+    .then(res => this._getResponseData(res))
   }
 
    // Редактирование профиля
@@ -25,7 +31,7 @@ export default class Api {
         about: userData.job
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 
   // Обновление аватара пользователя
@@ -37,7 +43,7 @@ export default class Api {
         avatar: userData.avatar
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 
   // Загрузка карточек с сервера
@@ -45,7 +51,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/`, {
         headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 
   // Добавление новой карточки
@@ -58,7 +64,7 @@ export default class Api {
         link: link
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 
   // Удаление карточки
@@ -67,7 +73,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 
   // Постановка лайка карточки
@@ -76,7 +82,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 
   // Снятие лайка
@@ -85,7 +91,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.message}`))
+    .then(res => this._getResponseData(res))
   }
 }
 
