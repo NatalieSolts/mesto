@@ -42,19 +42,14 @@ export default class Card {
       this._card.querySelector('.cards__delete').classList.add('cards__delete_hidden')
     }
 
-    this._showNumOfLikes()
     this._updateLikesView();
 
     return this._card;
   }
 
-  // Отображение количество лайков карточки
-  _showNumOfLikes() {
-    this._likeCounter.textContent = this._likes.length;
-    }
-
-  // переключает фон у лайка
+  // Отображение количество лайков карточки и переключает фон у лайка
   _updateLikesView() {
+    this._likeCounter.textContent = this._likes.length;
     if (this.isLiked()) {
       this._likeButton.classList.add('cards__icon-heart_is-active')
     } else {
@@ -67,17 +62,14 @@ export default class Card {
     return Boolean(this._likes.some(user => user._id === this._userId));
   }
 
-
   likesCounter(numOfLikes) {
     this._likes = numOfLikes;
-    this.isLiked();
-    this._updateLikesView()
-    this._showNumOfLikes();
+    this._updateLikesView();
   }
 
   deleteClick() {
-    this._card.remove()
-    this._card = null
+    this._card.remove();
+    this._card = null;
   }
 
    _setEventListeners = () => {
